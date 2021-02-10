@@ -24,7 +24,7 @@ import egovframework.rte.psl.dataaccess.EgovAbstractMapper;
  *
  */
 public abstract class EgovComAbstractMapper extends EgovAbstractMapper {
-	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+	//private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	@Resource(name="egov.sqlSession")
 	
 	public void setSqlSessionFactory(SqlSessionFactory sqlSession) {
