@@ -1,9 +1,9 @@
 package edu.human.com.common;
 
 import java.util.List;
-
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ import egovframework.rte.psl.dataaccess.EgovAbstractMapper;
  * 오버라이드해서 전자정부에서 제공한 EgovAbastacMapper 추상클래스에서 정의된 명세를 
  * 아래 클래스 재정의(오버라이딩)해서 메서드를 구현하게 됩니다. 
  * 추상클래스를 만드는 목적: 멤버변수또는 멤버메서드를 규격화 합니다.(전자정부표준을 준수하였는지 인증받기 위해서)
- * @author 김일국
+ * @author 이찬홍
  *
  */
 public abstract class EgovComAbstractMapper extends EgovAbstractMapper {
@@ -32,9 +32,13 @@ public abstract class EgovComAbstractMapper extends EgovAbstractMapper {
 	}
 	
 	@Override
+	public int delete(String queryId) {
+		return getSqlSession().delete(queryId);
+	}
+
+	@Override
 	public int delete(String queryId, Object parameterObject) {
-		// TODO Auto-generated method stub
-		return super.delete(queryId, parameterObject);
+		return getSqlSession().delete(queryId, parameterObject);
 	}
 	
 	@Override
@@ -48,18 +52,21 @@ public abstract class EgovComAbstractMapper extends EgovAbstractMapper {
 	}
 	@Override
 	public <E> List<E> selectList(String queryId, Object parameterObject) {
-		// TODO Auto-generated method stub
-		return super.selectList(queryId, parameterObject);
+		return getSqlSession().selectList(queryId, parameterObject);
 	}
 	@Override
 	public <E> List<E> selectList(String queryId) {
-		// TODO Auto-generated method stub
-		return super.selectList(queryId);
+		return getSqlSession().selectList(queryId);
 	}
+	
+	@Override
+	public <T> T selectOne(String queryId) {
+		return getSqlSession().selectOne(queryId);
+	}
+
 	@Override
 	public <T> T selectOne(String queryId, Object parameterObject) {
-		// TODO Auto-generated method stub
-		return super.selectOne(queryId, parameterObject);
+		return getSqlSession().selectOne(queryId, parameterObject);
 	}
 	
 	@Override
@@ -71,4 +78,23 @@ public abstract class EgovComAbstractMapper extends EgovAbstractMapper {
 	public int update(String queryId, Object parameterObject) {
 		return getSqlSession().update(queryId, parameterObject);
 	}
+	
+	@Override
+	public <E> List<E> selectList(String queryId, Object parameterObject, RowBounds rowBounds) {
+		return getSqlSession().selectList(queryId, parameterObject, rowBounds);
+	}
+
+	/**
+	 * 페이징범위계산: pageIndex(선택한페이지) 와 pageSize(=limit,1페이지당보여줄계수) 2개 값을 매개변수로 받아서
+	 * 쿼리에서 시작 인덱스번호를 구하기: offset = (pageIndex-1)*pageSize;
+	 * 1페이지일떄시작*offset: (1-1)x10 = 0 [테이블에서는 1번째 레코드]
+ 	 * 2페이지일때시작*offset: (2-1)x10 = 10[테이블에서는 11번째 레코드]
+	 */
+	@Override
+	public List<?> listWithPaging(String queryId, Object parameterObject, int pageIndex, int pageSize) {
+		int offset = (pageIndex-1) * pageSize;
+		RowBounds rowBounds = new RowBounds(offset, pageSize);//(시작인덱스번호,꺼내올 개수)
+		return getSqlSession().selectList(queryId, parameterObject, rowBounds);
+	}
+	
 }
