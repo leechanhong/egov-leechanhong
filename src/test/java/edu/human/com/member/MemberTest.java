@@ -35,6 +35,7 @@ public class MemberTest {
 		EmployerInfoVO memberVO = new EmployerInfoVO();
 		memberVO.setEMPLYR_ID("user_1");//수정할 고유ID값 지정
 		memberVO.setUSER_NM("사용자_1");
+		memberVO.setORGNZT_ID("ORGNZT_0000000000000");//외래키이기때문에
 		//암호값에 공백이면, 쿼리에서 제외됩니다.
 		String secPassword = "";
 		memberVO.setPASSWORD(secPassword);
@@ -46,12 +47,12 @@ public class MemberTest {
 		memberVO.setHOUSE_ADRES("집주소");
 		memberVO.setGROUP_ID("GROUP_00000000000000");//외래키이기때문에 부모테이블에 있는값을 넣어야 함.
 		memberVO.setEMPLYR_STTUS_CODE("P");//회원상태코드 P-활성,S-비활성
-		memberVO.setESNTL_ID("USRCNFRM_00000000000");//고유ID이기때문에
+		//memberVO.setESNTL_ID("USRCNFRM_00000000000");//고유ID이기때문에
 		memberService.updateMember(memberVO);
 	}
 	@Test
 	public void deleteMember() throws Exception {
-		int result = memberService.deleteMember("user_3");
+		int result = memberService.deleteMember("user_1");
 		if(result > 0) {
 			System.out.println("디버그: 정상적으로 삭제 되었습니다.");
 		} else {
@@ -79,7 +80,7 @@ public class MemberTest {
 		memberVO.setHOUSE_ADRES("집주소");
 		memberVO.setGROUP_ID("GROUP_00000000000000");//외래키이기때문에 부모테이블에 있는값을 넣어야 함.
 		memberVO.setEMPLYR_STTUS_CODE("P");//회원상태코드 P-활성,S-비활성
-		memberVO.setESNTL_ID("USRCNFRM_00000000000");//고유ID이기때문에
+		memberVO.setESNTL_ID("USRCNFRM_" + memberList.size());//고유ID이기때문에 중복되면 않됨
 		memberService.insertMember(memberVO);
 	}
 	@Test
