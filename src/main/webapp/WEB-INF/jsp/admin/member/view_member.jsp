@@ -84,14 +84,16 @@
                   <div class="form-group">
                   	<label for="EMPLYR_STTUS_CODE">EMPLYR_STTUS_CODE</label>
                   	<select class="form-control" name="EMPLYR_STTUS_CODE" id="EMPLYR_STTUS_CODE">
-                  	<!-- 
-                  		<option value="P" <c:out value="${(memberVO.EMPLYR_STTUS_CODE=='P')?'selected':''}" />>활성</option>
-                  		<option value="S" <c:out value="${(memberVO.EMPLYR_STTUS_CODE=='S')?'selected':''}" />>비활성</option>
-                  	-->
+	                  	<c:forEach items="${codeMap}" var="sub">
+	                  		<option value="${sub.value.CODE}" <c:out value="${(memberVO.EMPLYR_STTUS_CODE==sub.value.CODE)?'selected':''}" />>${sub.value.CODE_NM}</option>
+	                  	</c:forEach>
                   	</select>
-                  	<c:forEach items="${codeMap}" var="detailCode" varStatus="cnt">
-                  		${detailCode} 확인
+                  	<!-- 위 코드 설명: 맵자료형을 jstl에서 출력하기 (아래) -->
+                  	<!-- codeMap자료-> {P={CODE=P, CODE_NM=활성}, S={CODE=S, CODE_NM=비활성}} 
+                  	<c:forEach items="${codeMap}" var="sub2">
+                  		codeMap의 밸류를 분리하면 키는 ${sub2.value.CODE} 밸류는 ${sub2.value.CODE_NM}<br>
                   	</c:forEach>
+                  	-->
                   </div>
                   <div class="form-group">
                   	<label for="GROUP_ID">GROUP_ID</label>
