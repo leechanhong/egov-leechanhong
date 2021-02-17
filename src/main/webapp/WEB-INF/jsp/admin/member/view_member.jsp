@@ -30,50 +30,69 @@
           <div class="col-12"><!-- 그리드시스템중 12가로칼럼 width:100% -->
           
           <!-- form start -->
-          <form name="write_form" action="member_list.html" method="post">
+          <form name="write_form" action="<c:url value='/admin/member/update_member.do' />" method="post">
           
           <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">CREATE Member</h3>
+                <h3 class="card-title">UPDATE Member</h3>
               </div>
               <!-- /.card-header -->
               
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="user_id">user_id</label>
-                    <input type="text" class="form-control" name="user_id" id="user_id" placeholder="ID를 입력해 주세요." required>
+                    <label for="EMPLYR_ID">EMPLYR_ID</label>
+                    <input value="${memberVO.EMPLYR_ID}" type="text" class="form-control" name="EMPLYR_ID" id="EMPLYR_ID" placeholder="ID를 입력해 주세요." required readonly>
                     <!-- 폼에서 input같은 입력태그에는 name속성이 반드시 필요, 이유는 DB에 입력할때,
                     	 값을 전송하게 되는데, 전송값을 담아두는 이름이 name가 되고, 위에서는 user_id 입니다. -->
                   </div>
                   <div class="form-group">
-                    <label for="user_pw">Password</label>
-                    <input type="password" class="form-control" name="user_pw" id="user_pw" placeholder="암호를 입력해 주세요." required>
+                    <label for="PASSWORD">PASSWORD</label>
+                    <input type="password" class="form-control" name="PASSWORD" id="PASSWORD" placeholder="암호를 입력해 주세요." required>
                   </div>
                   <div class="form-group">
-                  	<label for="user_name">user_name</label>
-                  	<input type="text" class="form-control" name="user_name" id="user_name" placeholder="이름을 입력해 주세요." required>
+                    <label for="PASSWORD_HINT">PASSWORD_HINT</label>
+                    <input value="${memberVO.PASSWORD_HINT}" type="text" class="form-control" name="PASSWORD_HINT" id="PASSWORD_HINT" placeholder="암호힌트를 입력해 주세요." required>
+                  </div>
+                  <div class="form-group">
+                    <label for="PASSWORD_CNSR">PASSWORD_CNSR</label>
+                    <input value="${memberVO.PASSWORD_CNSR}" type="text" class="form-control" name="PASSWORD_CNSR" id="PASSWORD_CNSR" placeholder="암호힌트 답변을 입력해 주세요." required>
+                  </div>
+                  <div class="form-group">
+                  	<label for="USER_NM">USER_NM</label>
+                  	<input value="${memberVO.USER_NM}" type="text" class="form-control" name="USER_NM" id="USER_NM" placeholder="이름을 입력해 주세요." required>
                   	<!-- 필수입력 값은 html5에서 지원하는 유효성 검사중 required 속성을 사용해서 빈(null)값체크(유효성검사)를 합니다. -->
                   </div>
                   <div class="form-group">
-                  	<label for="email">email</label>
-                  	<input type="email" class="form-control" name="email" id="email" placeholder="이메일을 입력해 주세요" required>
-                  </div>
-                  <div class="form-group">
-                  	<label for="point">point</label>
-                  	<input type="text" class="form-control" name="point" id="point" placeholder="포인트를 입력해 주세요" required>
-                  </div>
-                  <div class="form-group">
-                  	<label for="enabled">enabled</label>
-                  	<select class="form-control" name="enabled" id="enabled">
-                  		<option value="0">false</option>
-                  		<option value="1" selected>true</option>
+                  	<label for="SEXDSTN_CODE">SEXDSTN_CODE</label>
+                  	<select class="form-control" name="SEXDSTN_CODE" id="SEXDSTN_CODE">
+                  		<option value="M" <c:out value="${(memberVO.SEXDSTN_CODE=='M')?'selected':''}" />>남자</option>
+                  		<option value="F" <c:out value="${(memberVO.SEXDSTN_CODE=='F')?'selected':''}" />>여자</option>
                   	</select>
                   </div>
                   <div class="form-group">
-                  	<label for="levels">levels</label>
-                  	<select class="form-control" name="levels" id="levels">
-                  		<option value="ROLE_ADMIN">ROLE_ADMIN</option>
-                  		<option value="ROLE_USER" selected>ROLE_USER</option>
+                  	<label for="EMAIL_ADRES">EMAIL_ADRES</label>
+                  	<input value="${memberVO.EMAIL_ADRES}" type="email" class="form-control" name="EMAIL_ADRES" id="EMAIL_ADRES" placeholder="이메일을 입력해 주세요" required>
+                  </div>
+                  <div class="form-group">
+                  	<label for="HOUSE_ADRES">HOUSE_ADRES</label>
+                  	<input value="${memberVO.HOUSE_ADRES}" type="text" class="form-control" name="HOUSE_ADRES" id="HOUSE_ADRES" placeholder="집주소를 입력해 주세요" required>
+                  </div>
+                  <div class="form-group">
+                  	<label for="ORGNZT_ID">ORGNZT_ID</label>
+                  	<input value="${memberVO.ORGNZT_ID}" type="text" class="form-control" name="ORGNZT_ID" id="ORGNZT_ID" placeholder="소속기관을 입력해 주세요" required>
+                  </div>
+                  <div class="form-group">
+                  	<label for="EMPLYR_STTUS_CODE">EMPLYR_STTUS_CODE</label>
+                  	<select class="form-control" name="EMPLYR_STTUS_CODE" id="EMPLYR_STTUS_CODE">
+                  		<option value="P" <c:out value="${(memberVO.EMPLYR_STTUS_CODE=='P')?'selected':''}" />>활성</option>
+                  		<option value="S" <c:out value="${(memberVO.EMPLYR_STTUS_CODE=='S')?'selected':''}" />>비활성</option>
+                  	</select>
+                  </div>
+                  <div class="form-group">
+                  	<label for="GROUP_ID">GROUP_ID</label>
+                  	<select class="form-control" name="GROUP_ID" id="GROUP_ID">
+                  		<option value="" <c:out value="" />>ROLE_ADMIN</option>
+                  		<option value="">ROLE_USER</option>
                   	</select>
                   </div>
                 </div>
