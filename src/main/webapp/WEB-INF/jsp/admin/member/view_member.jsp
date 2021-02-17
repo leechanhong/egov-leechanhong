@@ -98,9 +98,10 @@
                   <div class="form-group">
                   	<label for="GROUP_ID">GROUP_ID</label>
                   	<select class="form-control" name="GROUP_ID" id="GROUP_ID">
-                  		<option value="" <c:out value="" />>ROLE_ADMIN</option>
-                  		<option value="">ROLE_USER</option>
-                  	</select>
+                  		<c:forEach items="${codeGroup}" var="sub">
+                  			<option value="${sub.value.GROUP_ID}" <c:out value="${(memberVO.GROUP_ID==sub.value.GROUP_ID)?'selected':''}" /> >${sub.value.GROUP_NM}</option>
+                  		</c:forEach>
+                  	</select>                  		
                   </div>
                   <div class="form-group">
                   	<label for="ESNTL_ID">ESNTL_ID</label>

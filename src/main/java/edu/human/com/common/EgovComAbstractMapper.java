@@ -104,5 +104,12 @@ public abstract class EgovComAbstractMapper extends EgovAbstractMapper {
 		// 공통코드를 위한 맵타입을 반환하는 sqlSession템플릿 사용(아래)
 		return getSqlSession().selectMap(queryId, parameterObject, mapKey);
 	}
+
+	@Override
+	public <K, V> Map<K, V> selectMap(String queryId, String mapKey) {
+		// 그룹코드는 키로 이름은 밸류로 맵자료형으로 반환하는 sqlSession템플릿 사용(아래)
+		return getSqlSession().selectMap(queryId, mapKey);
+	}
+	
 	
 }

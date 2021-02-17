@@ -25,12 +25,12 @@ public class AdminController {
 		//회원 보기[수정] 페이지 이동.
 		EmployerInfoVO memberVO = memberService.viewMember(emplyr_id);
 		model.addAttribute("memberVO", memberVO);
-		//공통코드 로그인활성/비활성 리스트 오브젝트 생성(아래)
+		//공통코드 로그인활성/비활성 해시맵 오브젝트 생성(아래)
 		//System.out.println("디버그:" + memberService.selectCodeMap("COM999"));
 		//맵결과: 디버그:{P={CODE=P, CODE_NM=활성}, S={CODE=S, CODE_NM=비활성}}
 		model.addAttribute("codeMap", memberService.selectCodeMap("COM999"));
-		//그룹이름 리스트 오브젝트 생성(아래)
-		
+		//그룹이름 해시맵 오브젝트 생성(아래)
+		model.addAttribute("codeGroup", memberService.selectGroupMap());
 		return "admin/member/view_member";
 	}
 	@RequestMapping(value="/admin/member/update_member.do",method=RequestMethod.POST)
