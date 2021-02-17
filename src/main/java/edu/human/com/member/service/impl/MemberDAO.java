@@ -40,6 +40,7 @@ public class MemberDAO extends EgovComAbstractMapper {
 	}
 	
 	public Map<Object, Object> selectCodeMap(String code_id) throws Exception {
-		return selectMap("memberMapper.selectCodeMap", code_id);
+		System.out.println("디버그2 : " + code_id);
+		return selectMap("memberMapper.selectCodeMap", code_id, "CODE");
 	}
 }
