@@ -138,8 +138,25 @@ $(document).ready(function(){
 	//EMPYR_ID 중복체크 이후 submit버튼을 disabled를 false로 활성화 시키면 전송이 가능 Ajax
 	//blur조건 focus의 반대말.
 	$("#EMPLYR_ID").bind("blur", function(){
+		var emplyer_id = $(this).val();
+		$.ajax({
+			url:"<c:url value='/' />idcheck?emplyer_id="+emplyer_id,//@Response사용하는 클래스의 메서드 매핑URL값
+			type:"get",//jsp에서 컨트롤러로 보내는하는 방식
+			dataType:"text",//ajax결과를 컨트롤러에서 받는 방식
+			success:function(result){
+				if(result=="0"){//중복id가 없으면
+					alert("사용가능한 ID입니다.");
+					$("#btn_insert").attr("disabled", false);//서브밋 버튼 활성화
+				}else{//중복id가 있으면
+					alert("중복ID가 존재합니다.");
+					$("#btn_insert").attr("disabled", true);//서브밋 버튼 비활성화
+				}
+			},
+			error:function(){
+				alert("RestAPI서버에 문제가 있습니다.");
+			}
+		});
 		
-		$("#btn_insert").attr("disabled", false);//서브밋 버튼 활성화
 	});
 });
 </script>
