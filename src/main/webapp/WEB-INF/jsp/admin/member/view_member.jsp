@@ -116,7 +116,7 @@
             <div class="card-body">
             	<a href="<c:url value='/admin/member/list_member.do' />" class="btn btn-primary float-right mr-1">목록</a>
               	<button type="submit" class="btn btn-info float-right mr-1">수정</button>
-              	<button type="button" class="btn btn-danger float-right mr-1">삭제</button>            	
+              	<button id="btn_delete" type="button" class="btn btn-danger float-right mr-1">삭제</button>            	
               	<!-- a태그는 링크이동은 되지만, post값을 전송하지는 못합니다. 그래서, button태그를 사용. -->
             </div>
           <!-- 버튼영역 끝 -->
@@ -134,3 +134,14 @@
   <!-- /.content-wrapper -->
 
 <%@ include file="../include/footer.jsp" %>
+<script>
+$(document).ready(function(){
+	$("#btn_delete").on("click",function(){
+		if(confirm("정말로 삭제 하시겠습니까?")) {
+			var delete_form = $("form[name='write_form']");
+			delete_form.attr("action","<c:url value='/admin/member/delete_member.do' />");
+			delete_form.submit();
+		}
+	});
+});
+</script>

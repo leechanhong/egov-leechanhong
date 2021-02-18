@@ -20,6 +20,8 @@ public class AdminController {
 	@Inject
 	private MemberService memberService; 
 	
+	//@RequestMapping(value="/admin/member/delete_member.do",method=RequestMethod.POST)
+	
 	@RequestMapping(value="/admin/member/view_member.do",method=RequestMethod.GET)
 	public String view_member(Model model,@RequestParam("emplyr_id") String emplyr_id) throws Exception {
 		//회원 보기[수정] 페이지 이동.
