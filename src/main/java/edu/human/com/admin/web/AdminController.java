@@ -77,6 +77,12 @@ public class AdminController {
 	@RequestMapping(value="/admin/member/list_member.do",method=RequestMethod.GET)
 	public String list_member(Model model,PageVO pageVO) throws Exception {
 		//회원관리 페이지 이동.
+		if(pageVO.getPage() == null) {
+			pageVO.setPage(1);
+		}		
+		pageVO.setPerPageNum(5);//하단의 페이징보여줄 개수
+		pageVO.setQueryPerPageNum(10);//쿼리에서 1페이당 보여줄 개수=화면에서 1페이당 보여줌
+		//전체페이지 개수는 자동계산=total카운트를 계산순간(아래)
 		List<EmployerInfoVO> listMember = memberService.selectMember(pageVO);
 		model.addAttribute("listMember", listMember);
 		return "admin/member/list_member";
