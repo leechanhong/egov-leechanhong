@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.human.com.member.service.EmployerInfoVO;
 import edu.human.com.member.service.MemberService;
+import edu.human.com.util.PageVO;
 import egovframework.let.utl.sim.service.EgovFileScrty;
 
 @Controller
@@ -74,9 +75,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/member/list_member.do",method=RequestMethod.GET)
-	public String list_member(Model model) throws Exception {
+	public String list_member(Model model,PageVO pageVO) throws Exception {
 		//회원관리 페이지 이동.
-		List<EmployerInfoVO> listMember = memberService.selectMember();
+		List<EmployerInfoVO> listMember = memberService.selectMember(pageVO);
 		model.addAttribute("listMember", listMember);
 		return "admin/member/list_member";
 	}
