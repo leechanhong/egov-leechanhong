@@ -41,7 +41,7 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="EMPLYR_ID">EMPLYR_ID</label>
-                    <input type="text" class="form-control" name="EMPLYR_ID" id="EMPLYR_ID" placeholder="ID를 입력해 주세요." required readonly>
+                    <input type="text" class="form-control" name="EMPLYR_ID" id="EMPLYR_ID" placeholder="ID를 입력해 주세요." required>
                     <!-- 폼에서 input같은 입력태그에는 name속성이 반드시 필요, 이유는 DB에 입력할때,
                     	 값을 전송하게 되는데, 전송값을 담아두는 이름이 name가 되고, 위에서는 user_id 입니다. -->
                   </div>
@@ -79,13 +79,13 @@
                   </div>
                   <div class="form-group">
                   	<label for="ORGNZT_ID">ORGNZT_ID</label>
-                  	<input type="text" class="form-control" name="ORGNZT_ID" id="ORGNZT_ID" placeholder="소속기관을 입력해 주세요" required>
+                  	<input value="ORGNZT_0000000000000" type="text" class="form-control" name="ORGNZT_ID" id="ORGNZT_ID" placeholder="소속기관을 입력해 주세요" required readonly>
                   </div>
                   <div class="form-group">
                   	<label for="EMPLYR_STTUS_CODE">EMPLYR_STTUS_CODE</label>
                   	<select class="form-control" name="EMPLYR_STTUS_CODE" id="EMPLYR_STTUS_CODE">
 	                  	<c:forEach items="${codeMap}" var="sub">
-	                  		<option value="${sub.value.CODE}" >${sub.value.CODE_NM}</option>
+	                  		<option value="${sub.value.CODE}">${sub.value.CODE_NM}</option>
 	                  	</c:forEach>
                   	</select>
                   	<!-- 위 코드 설명: 맵자료형을 jstl에서 출력하기 (아래) -->
@@ -115,8 +115,7 @@
           <!-- 버튼영역 시작 -->
             <div class="card-body">
             	<a href="<c:url value='/admin/member/list_member.do' />" class="btn btn-primary float-right mr-1">목록</a>
-              	<button type="submit" class="btn btn-info float-right mr-1">수정</button>
-              	<button id="btn_delete" type="button" class="btn btn-danger float-right mr-1">삭제</button>            	
+              	<button id="btn_insert" type="submit" class="btn btn-info float-right mr-1" disabled>등록</button>
               	<!-- a태그는 링크이동은 되지만, post값을 전송하지는 못합니다. 그래서, button태그를 사용. -->
             </div>
           <!-- 버튼영역 끝 -->
@@ -136,12 +135,11 @@
 <%@ include file="../include/footer.jsp" %>
 <script>
 $(document).ready(function(){
-	$("#btn_delete").on("click",function(){
-		if(confirm("정말로 삭제 하시겠습니까?")) {
-			var delete_form = $("form[name='write_form']");
-			delete_form.attr("action","<c:url value='/admin/member/delete_member.do' />");
-			delete_form.submit();
-		}
+	//EMPYR_ID 중복체크 이후 submit버튼을 disabled를 false로 활성화 시키면 전송이 가능 Ajax
+	//blur조건 focus의 반대말.
+	$("#EMPLYR_ID").bind("blur", function(){
+		
+		$("#btn_insert").attr("disabled", false);//서브밋 버튼 활성화
 	});
 });
 </script>
