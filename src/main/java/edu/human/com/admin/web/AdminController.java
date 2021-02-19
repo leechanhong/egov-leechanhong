@@ -22,7 +22,10 @@ import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.util.EgovUserDetailsHelper;
 import egovframework.let.cop.bbs.service.BoardMasterVO;
 import egovframework.let.cop.bbs.service.BoardVO;
+import egovframework.let.cop.bbs.service.EgovBBSAttributeManageService;
+import egovframework.let.cop.bbs.service.EgovBBSManageService;
 import egovframework.let.utl.sim.service.EgovFileScrty;
+import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
@@ -30,10 +33,57 @@ public class AdminController {
 	
 	@Inject
 	private MemberService memberService;
-	
+	//스프링빈(new키워드만드는 오브젝트X) 오브젝트를 사용하는 방법 @Inject(자바8이상), @Autowired(많이사용), @Resource(자바7이하)
 	@Autowired
 	private EgovBBSAttributeManageService bbsAttrbService;
+	@Autowired
+	private EgovPropertyService propertyService;
+	@Autowired
+	private EgovBBSManageService bbsMngService;
 	
+	@RequestMapping("/admin/board/view_board.do")
+	public String view_board(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
+		LoginVO user = new LoginVO();
+	    if(EgovUserDetailsHelper.isAuthenticated()){
+	    	user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		}
+
+		// 조회수 증가 여부 지정
+		boardVO.setPlusCount(true);
+
+		//---------------------------------
+		// 2009.06.29 : 2단계 기능 추가
+		//---------------------------------
+		if (!boardVO.getSubPageIndex().equals("")) {
+		    boardVO.setPlusCount(false);
+		}
+		////-------------------------------
+
+		boardVO.setLastUpdusrId(user.getUniqId());
+		BoardVO vo = bbsMngService.selectBoardArticle(boardVO);
+
+		model.addAttribute("result", vo);
+
+		model.addAttribute("sessionUniqId", user.getUniqId());
+
+		//----------------------------
+		// template 처리 (기본 BBS template 지정  포함)
+		//----------------------------
+		BoardMasterVO master = new BoardMasterVO();
+
+		master.setBbsId(boardVO.getBbsId());
+		master.setUniqId(user.getUniqId());
+
+		BoardMasterVO masterVo = bbsAttrbService.selectBBSMasterInf(master);
+
+		if (masterVo.getTmplatCours() == null || masterVo.getTmplatCours().equals("")) {
+		    masterVo.setTmplatCours("/css/egovframework/cop/bbs/egovBaseTemplate.css");
+		}
+
+		model.addAttribute("brdMstrVO", masterVo);
+		
+		return "admin/board/view_board";
+	}
 	@RequestMapping("/admin/board/list_board.do")
 	public String list_board(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
@@ -42,7 +92,7 @@ public class AdminController {
 		boardVO.setBbsNm(boardVO.getBbsNm());
 
 		BoardMasterVO vo = new BoardMasterVO();
-
+		System.out.println("디버그: 게시판아이디는 "+boardVO.getBbsId());
 		vo.setBbsId(boardVO.getBbsId());
 		vo.setUniqId(user.getUniqId());
 
