@@ -47,7 +47,7 @@
                   </div>
                   <div class="form-group">
                   	<label for="nttCn">Content</label>
-                  	<textarea rows="5" name="nttCn" id="nttCn" class="form-control">${result.nttCn}</textarea>
+                  	<textarea rows="5" name="nttCn" id="nttCn" class="form-control"><c:out value="${result.nttCn}" /></textarea>
                   	<!-- 필수입력 값은 html5에서 지원하는 유효성 검사중 required 속성을 사용해서 빈(null)값체크(유효성검사)를 합니다. -->
                   </div>
                   <div class="form-group">
@@ -59,7 +59,7 @@
                   </div>
                   <div class="custom-file">
                   	<c:if test="${not empty result.atchFileId}">
-		                <hr>
+		                <hr><br>
 		                <strong><i class="far fa-save mr-1"></i> 첨부파일</strong>
 		                <p class="text-muted">
 		                <c:import url="/cmm/fms/selectFileInfs.do" charEncoding="utf-8">

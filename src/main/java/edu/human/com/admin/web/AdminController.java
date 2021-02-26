@@ -67,9 +67,9 @@ public class AdminController {
 	@Autowired
 	private EgovFileMngUtil fileUtil;
 	
-	//게시물 등록 폼 호출 POST
+	//게시물 등록 폼화면 호출 POST
 	@RequestMapping("/admin/board/insert_board_form.do")
-	public String insert_board(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
+	public String insert_board_form(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model) throws Exception {
 		// 사용자권한 처리
 		if(!EgovUserDetailsHelper.isAuthenticated()) {
 			model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
@@ -100,11 +100,10 @@ public class AdminController {
 
 		model.addAttribute("brdMstrVO", bdMstr);
 		////-----------------------------
-		    
+
 		return "admin/board/insert_board";
 	}
-	
-	//게시물 등록 처리 호출 POST
+	//게시물 등록 DAO처리 호출 POST
 	@RequestMapping("/admin/board/insert_board.do")
 	public String insert_board(final MultipartHttpServletRequest multiRequest, @ModelAttribute("searchVO") BoardVO boardVO,
 		    @ModelAttribute("bdMstr") BoardMaster bdMstr, @ModelAttribute("board") Board board, BindingResult bindingResult, SessionStatus status,
@@ -165,7 +164,7 @@ public class AdminController {
 		}
 		return "redirect:/admin/board/list_board.do?bbsId="+board.getBbsId();
 	}
-			
+	
 	//게시물 수정 처리 호출 POST
 	@RequestMapping("/admin/board/update_board.do")
 	public String update_board(final MultipartHttpServletRequest multiRequest, @ModelAttribute("searchVO") BoardVO boardVO,
@@ -209,12 +208,12 @@ public class AdminController {
 		    if (!files.isEmpty()) {//첨부파일이 있을때 작동
 		    	//기존 첨부파일이 존재하지 않으면 신규등록
 				if ("".equals(atchFileId)) {
-					System.out.println("디버그1"+atchFileId);
+					System.out.println("디버그1:-기존첨부파일이 없을경우 신규등록시 사용"+atchFileId);
 				    List<FileVO> result = fileUtil.parseFileInf(files, "BBS_", 0, atchFileId, "");
 				    atchFileId = fileMngService.insertFileInfs(result);
 				    board.setAtchFileId(atchFileId);
-				} else {//기본첨부파일이 존재하면 기존 삭제하고, 신규등록
-					System.out.println("디버그2"+atchFileId);
+				} else {//기본첨부파일이 존재하면 기존것 보존하고, 다시 신규등록
+					System.out.println("디버그2:"+atchFileId);
 				    FileVO fvo = new FileVO();
 				    fvo.setAtchFileId(atchFileId);
 				    int cnt = fileMngService.getMaxFileSN(fvo);
@@ -230,14 +229,14 @@ public class AdminController {
 		    //게시물 업데이트 레코드 처리(아래)
 		    bbsMngService.updateBoardArticle(board);
 		}
+		
+	    BoardVO bdvo = new BoardVO();
+	    bdvo = bbsMngService.selectBoardArticle(boardVO);
 
-		BoardMaster master = new BoardMaster();
-	    BoardMasterVO bmvo = new BoardMasterVO();
-	    master.setBbsId(boardVO.getBbsId());
-	    master.setUniqId(user.getUniqId());
-		return "redirect:/admin/board/view_board.do?bbsId="+board.getBbsId()
-		+"&nttId="+board.getNttId()+"&bbsTyCode="+master.getBbsTyCode()+"&bbsAttrbCode="+master.getBbsAttrbCode()
-		+"&authFlag=Y&pageIndex="+boardVO.getPageIndex();
+	    return "redirect:/admin/board/view_board.do?bbsId="+bdvo.getBbsId()
+		+"&nttId="+bdvo.getNttId()+"&bbsTyCode="+bdvo.getBbsTyCode()
+		+"&bbsAttrbCode="+bdvo.getBbsAttrbCode()+"&authFlag=Y"
+		+"&pageIndex="+bdvo.getPageIndex();	
 		//return "redirect:/admin/board/list_board.do?bbsId="+board.getBbsId();
 	}
 	//게시물 수정 화면을 호출 POST
@@ -292,15 +291,14 @@ public class AdminController {
 			//fileVO.setAtchFileId(boardVO.getAtchFileId());
 			//fileMngService.deleteAllFileInf(fileVO);//USE_AT='N'삭제X
 			//물리파일지우려면 2가지값 필수: file_stre_cours, stre_file_nm
-			//실제 폴더에서 파일도 삭제(아래)
-			if(fileVO.getAtchFileId() !=null && fileVO.getAtchFileId() != "") {
-				List<FileVO> fileList = fileMngService.selectFileInfs(fileVO);
-				for(FileVO delfileVO:fileList) {
-					File target = new File(delfileVO.getFileStreCours(), delfileVO.getStreFileNm());
-					if(target.exists()) {
-						target.delete();//폴더에서 기존첨부파일 지우기
-						System.out.println("디버그:첨부파일삭제OK");
-					}
+			//실제 폴더에서 파일도 삭제(아래 1개만 삭제하는 로직 -> 여러개 삭제하는 로직 변경)
+			List<FileVO> fileList = fileMngService.selectFileInfs(fileVO);
+			for(FileVO oneFileVO:fileList) {
+				FileVO delfileVO = fileMngService.selectFileInf(oneFileVO);
+				File target = new File(delfileVO.getFileStreCours(), delfileVO.getStreFileNm());
+				if(target.exists()) {
+					target.delete();//폴더에서 기존첨부파일 지우기
+					System.out.println("디버그:첨부파일삭제OK");
 				}
 			}
 			//첨부파일 레코드삭제(아래)

@@ -30,11 +30,11 @@
           <div class="col-12"><!-- 그리드시스템중 12가로칼럼 width:100% -->
           
           <!-- form start -->
-          <form name="write_form" action="<c:url value='/admin/board/insert_board.do' />" method="post" encType="multipart/form-data">
+          <form name="insert_form" action="<c:url value='/admin/board/insert_board.do' />" method="post" encType="multipart/form-data">
           
           <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">CREATE Board</h3>
+                <h3 class="card-title">INSERT Board</h3>
               </div>
               <!-- /.card-header -->
               
@@ -113,11 +113,11 @@ $(document).ready(function () {
 </script>
 <script>
 $(document).ready(function(){
-	var update_form = $("form[name='write_form']");
+	var insert_form = $("form[name='insert_form']");
 	$("#btn_list").on("click",function(){
 		//alert("목록가기!");
-		update_form.attr("action","<c:url value='/admin/board/list_board.do' />");
-		update_form.submit();
+		insert_form.attr("action","<c:url value='/admin/board/list_board.do' />");
+		insert_form.submit();
 	});
 });
 </script>
