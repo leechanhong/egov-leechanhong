@@ -46,18 +46,245 @@
 ----------------------------------------------------------
 - C언어 이론(구름IDE사용).
 - 안드로이드 스튜디오 4.x 이론(https://slidesplayer.org/slide/14087618/)
-- 파스타클라우드 제일 마직막 달에 2주 기간중 배포(클라우드용-mysql을사용)
+- 파스타클라우드 제일 마직막 달에 2주기간에egov배포(클라우드용-mysql을사용)
 - IoT(아두이노,노드MCU보드로 실습-C언어책3권) 2주
 - 안드로이드앱(클라이언트)-통신-자바:스프링웹프로젝트(API서버) 2주
-#### 시험 미응시자 확인
-- 2월3일 UI구현 과제물 제출 + 사후 + 사전평가: 이현진씨(사정생겨서 취소)
-- 2월8일 SQL활용 과제물 및 서술형: 이현진씨(사정이생겨서 취소)
-- -----------------------------------------------------
+- -----------------------------------------------
+<A조=6명>김범주, 김수연, 김진아, 박정수, 배경득, 유우식,
+<B조=5명>신승만, 이병현, 이용오, 한미래, 황초희,
+<온라인=10명>
+김기명, 신숙정, 이찬홍, 이규혁, 정도영, 남가인, 이희탁, 이시은, 임송하, 정동규,
+
+#### 20210308(월) 작업예정.
+- 안드로이드스튜디오 AVD 애뮬 1개추가OK.-여기까지
+- 헬로앱 1개 생성. 애뮬레이터로 실행예정
+- egov프로젝트 메인페이지 출력물 시큐어코딩처리_egov기존save로직에 포함되었기 때문에 시큐어코딩처리 필요X.
+- 겔러리게시판 이미지 미리보기 기능추가예정.
+- 공지사항게시판 출력jsp생성예정.
+- 안드로이드PPT자료 학습진행 예정.
+
+#### 20210305(금) 작업.
+- 프로그래밍은 디버그-문제해결하는 부분이 주작업.
+- 개발할때는 프론트가 되었던, 백엔드, C, 자바, 스프링이든 디버그환경을 신경써야 합니다.
+- 수업전: egov프로젝트 에러표시 타일즈 템플릿 렌더링(화면출력)때문에 문제점이 않보입니다.
+- web.xml에서 error-page 설정을 주석처리OK.
+- egov 게시판 CRUD 중 CUD(타일즈적용) -> 홈컨트롤러 기존 관리자단 egov서비스이용해서 작업OK.
+- 안드로이드 스튜디오4.x 설치 후 기본학습 -> 스프링프로젝트와 통신에 사용.
+- 사용자단 디자인으로 메인작업(게시판내용 미리보기출력)예정.
+- C언어처음, printf("hello c!");
+- 자바언어처음, System.out.println("hello world!");
+- 스프링처음: 스프링MVC프로젝트 최초생성 Hello월드 시간출력(한글시간깨짐)
+- 안드로이드앱 처음 Blank앱(공백앱)을 생성시 Hello world 출력(안드로이드폰에 출력)
+- 인텔리J(안드로드이ST,그레이들 빌드, build.gradle) = 이클립스(egov-IDE,메이븐 빌드,pom.xml)
+- 앱프로젝트생성시 선택(자바.java, 코틀린.kt): 자바선택
+- SDK(소프트웨어 개발 키트-외부라이브러리): 메이븐의 레포지토리폴더와 유사
+- 안드로드이스튜디오 빌드->PC와USB로 연결된 스마트폰으로 실행결과확인 대신.
+- 앱 결과물을 출력할 PC애뮬레이터 설치 후 애뮬을 이용해서 실행결과확인.
+- 안드로이등가상기기: AVD(안드로이드 버추어 디바이스=애뮬레이터)
+- 실제 폰이 없이, 앱구동이 가능.
+- 신교재 2권 받으시면,목차 중에서 우리프로젝트진행상황과 매칭되는 부분 체크예정
+
+#### 20210304(목) 작업.
+- 페이징처리: list_board.jsp가 실행될때 -> ui:pagination의 type='paging' 타입이 호출 
+- -> context-common.xml 의 paginationManager(빈)이 실행 -> rendererType이 paging인 pageRenderer(빈)이 실행
+- jsp 의 EL(Express Language)표기법 사용해서 변수 출력.
+- 이중for문은: 출력시 2차원배열(표)를 출력합니다.
+- 단일for문은: 1차원배열
+- 구름IDE C언어 기본학습 구구단 설명OK. -> IoT에서 사용.
+- 주로 사용하는 jsp템플릿 종류:타일즈,벨로서티,타임리프,사이트메시
+- egov 게시판 CRUD 디자인부터 jsp변경(타일즈적용) -> 홈컨트롤러 기존egov서비스이용해서 화면CRUD 작업예정.
+- 사용자단 디자인으로 메인작업(게시판내용 미리보기출력)예정.
+- 안드로이드 스튜디오4.x 설치 후 기본학습 -> 스프링프로젝트와 통신에 사용.
+- 신교재 2권 받으시면,목차 중에서 우리프로젝트진행상황과 매칭되는 부분 체크예정
+
+#### 20210303(수) 작업.
+- 과제물 문서작업을 같이 진행 OK.
+- PDF교재에서 2. 요구사항 확인하기 제외.
+- 라이센스: BSD(버클리대학만든 소프트웨어 배포 라이센스), Mit, Apache, GNU, LGPL
+- 제품 1억 으로 납품 - 1년간 무상 유지보수
+- 1년 후는 유료 유지보수 : 납품가의 10% 1년유지보수계약.
+- 객체지향설계해 보았습니까? A.스프링 MVC프로젝트 작업해 보았습니다.
+- 프로그램을 MVC클래스 기반으로 되었는가=Controller-Service-Dao
+- 이클립스,자바1.8,톰캣8.0,Mysql5.7,오라클11g,메이븐=자바,스프링개발O
+- 리액트개발X: 고유의 개발환경. VS code, Create-react-app(JSX버전)
+- PHP개발X: 고유의 개발환경. Vs code, WAPM(만세아이콘), Mysql
+- 우리나라 그누보드, 워드프레스 페이지만들기 CMS 콘텐츠 매니지먼트 시스템 웹에이전시 PHP용 오픈소스 라이센스
+- 게시판관리, 페이지관리, 메뉴관리 = Contents Management System.
+- jsp용 CMS 오픈 라이센스 없습니다.
+- jsp용 CMS 상용 라이센스는 많이 있습니다.
+- 자바,C프로그램은 보통 1장짜리 프로그램소스
+- MVC스프링프로젝트 보통 1권짜리 프로그램소스
+
+#### 20210302(화) 작업
+- 컨테이너/클래스/객체/앱 라이프사이클(생명주기):생성>준비>실행<대기>소멸
+- 발주사 제안요청서(RFP)만들어서 나라장터에 올림 -> RFP를보고 개발사 제안서작성.
+- DB인터페이스 구현 과제물제출 OK.(4교시)
+- 사용자단 타일즈 디자인으로 게시판작업_디자인까지만 갖다놓고 여기까지 OK.
+- V.10.0.0진도 시작(PDF교재보면서)
+- 프론트엔드 프레임워크:리액트React/뷰Vue 프레임워크에서 CRUD 할수 있으면 OK.
+- 리액트로 만들 앱을 SPA(싱글 페이지 앱 Single Page App) 라고 합니다.
+- RestAPI에서 댓글 만들기와 동일: 한페이지안에서 CRUD됩니다.
+- 부트스트랩(AdminLTE)디자인+제이쿼리$.ajax(비동기통신)=리액트(비동기통신)
+- 백엔드 프레임워크: 스프링프레임워크/egov 프레임워크에서 CRUD 할수 있으면 OK.
+- 사용자단 타일즈 디자인으로 로그인처리 OK.(로그인하면 OLD로 이동->NEW로 이동)
+- 수업전 JUnit 테스트중 insert테스트에서 에러나는 부분 PageVO 객체오브젝트 new 키워드로 생성한 이후 아래 코드 추가해야 합니다.
+- pageVO.setPage(1);
+- pageVO.setPerPageNum(5);//하단의 페이징보여줄 개수
+- pageVO.setQueryPerPageNum(10000);//쿼리에서 1페이당 보여줄 개수=화면에서 1페이당 보여줌, 현재는 테스트라서 10000개로 강제로 처리OK.
+- 이전 스프링프로젝트에서 사용한 @ControllerAdvice 컨트롤러에서 발생되는 에러를 가로채는 기능을 사용하지 않고 아래내용을 사용합니다OK.
+
+```
+<!-- 
+   행자부 시큐어코딩 가이드에 따라서 에러코드를 노출하면 않되기 때문에 일반안내문자로 표기합니다.
+   이전 스프링프로젝트에서 사용한 @ControllerAdvice 컨트롤러에서 발생되는 에러를 가로채는 기능을 사용X
+   사전처리: 이전에 주석처리한 web.xml 의 에러페이지 주석해제 후 error.jsp에 아래내용 추가
+   사전확인: 이전에 주석처리한 egov-com-servlet.xml 내용만 확인
+   기술참조:https://mystarlight.tistory.com/123
+-->
+<!-- 주의: 개발할때는 아래내용이 필요하지만, 배포할때는 주석 처리해서 보이지 않게 합니다. -->
+<br>에러code : ${requestScope['javax.servlet.error.status_code']}
+<br>exception type : ${requestScope['javax.servlet.error.exception_type']}
+<br>message : ${requestScope['javax.servlet.error.message']}
+<br>exception : ${requestScope['javax.servlet.error.exception']}
+<br>request uri : <a href="${requestScope['javax.servlet.error.request_uri']}">${requestScope['javax.servlet.error.request_uri']}</a>
+<br>servlet name : ${requestScope['javax.servlet.error.servlet_name']}
+<c:set var="exception" value="${requestScope['javax.servlet.error.exception']}"/>
+<br>에러추적trace : 
+ <ul>
+  <c:forEach items="${exception.getStackTrace()}" var="stack">
+<li>${stack.toString()}</li>
+</c:forEach>
+ </ul>
+```
+
+#### 20210226(금) 작업
+- 첨부파일 저장 한 이후 수정할때 에러가 발생 처리OK.
+- 수정한 이후 리스트로 이동 -> 뷰 페이지로 이동하게 변경OK.
+- 기존 egov는 첨부파일을 여러번 입력가능때문에, 우리 삭제로직을 약간변경OK.
+- 글작성에 관련된 insert_board.jsp생성+컨트롤러 추가OK.
+- 관리자단 마무리 -> 사용자단 디자인으로 메인+게시판CRUD
+- 사용자단 resources/home폴더 생성해서 이 디자인OK. 
+- 기존 egov디자인 메인 main폴더 -> 우리home디자인의 메인 home폴더 변경해서 적용
+- edu.human.com.home.web 패키지에 컨트롤러.
+- redirect(새로고침해도 글이 재등록이 않됨-이전데이터를 날리고 이동.) VS forward(새로고침하면 글이 중복등록이 됨-이전페이지데이터를 가지고이동) = 폭탄게시판이 만들어 집니다.
+- null VS ''공백 의 차이점: null은 변수명이 존재하지 않는상태(메모리할당X), ''공백은 변수명은 존재하지만(메모리할당O), 값이 비어있는변수.
+- index.jsp 파일을 수정해서 home폴더가 주 디자인으로 되게 변경OK.
+- 로그아웃은 페이지가 없이 처리 되기 때문에 home컨트롤러만 매핑을 추가해서 처리OK.
+- tiles,velocity,thymeleaf 3가지 jsp템플릿 종류중 타일즈 템플릿을 사용해서 home디자인을 사용할 예정. 
+- IT강의저장소 V9.0.0 하단 자료를 참조.
+- tiles의 타일 목욕탕의 타일붙여서 사용하는 내용과 의미가 비슷.
+- /tiles/home.do URL호출 -> home.tiles 파일File호출 타일즈설정이 가로챕니다.(layout.jsp파일에서 가로챔)
+- /WEB-INF/jsp/tiles/{1}.jsp 바인딩 -> content이름에 담겨서...
+- /WEB-INF/jsp/tiles/layouts/layout.jsp 이파일의 content이름에 나오게됨
+- error_user.jsp 페이지만들어서 1페이지안에 에러메시지 보이게 처리예정.
+
+#### 20210225(목) 작업
+- egov(Mysql) 마무리.
+- 기존: 게시판 삭제시 기존 USE_AT='N' 처리해서 실제 삭제 X(이로직,파일삭제X)
+- 변경: 게시판 삭제시 레코드삭제처리로. 첨부파일같이 삭제(이로직,파일삭제O)
+- boardService엣 위 게시물 삭제로직도 추가.(기존FileVO그대로사용)
+- 구름IDE C언어 구구단 설명예정.
+
+#### 20210223(화) 작업
+- 인터페이스 구현 수업 진도시작.
+- https://github.com/miniplugin/human/tree/v9.0.0
+- 수업전: 어제삭제 하는 부분에서 첨부파일 삭제까지 처리확인.
+- (egovError.jsp 에 제대로된 error메세지표시)
+- WEB-INF/jsp/cmm/error/egovError.jsp 확인예정.
+- egov 관리자단 게시판부분 CRUD 작업 마무리예정.
+- 학원PC: 설치할 SW
+- egov.zip : 
+- https://drive.google.com/file/d/1GnIzkvZNgVj-o4EbHzoy5WSDCEWk3GAx/view?usp=sharing
+- egov3.10..zip:
+- https://drive.google.com/file/d/1YqSF2rKbR1M1hbn_fn_Jpg6n8_7abf96/view?usp=sharing
+- mysql : 
+- https://drive.google.com/file/d/1r2tUfV_eeYS2XhzXKabCZeEgeLP-LYL0/view?usp=sharing
+- ---------------
+- 사용자단 메인페이지 UI 변경예정(타일즈템플릿-벨로서티템플릿 jsp UI템플릿을 사용) tiles템플릿을 사용예정.
+- 위 JSP UI템플릿은 include기능을 확장한 라이브러리.
+- 쉬어가는 시간에 포인터이후 진도확인 및 C언어 은행입출금프로그램 실습예정.
+
+#### 20210222(월) 작업
+- 서버프로그램 과제물 제출 4교시에 있습니다.
+- egov 관리자단 게시판부분 CRUD 작업 마무리예정.
+- 바인딩=매칭=매핑
+- Flag=깃발=상태를표시할때 사용.
+- 기존 전자정부프로젝트에서의 삭제. => 진짜로 삭제가 아니고, 삭제필드(플래그필드USE_AT)에 삭제표시Y->N를 합니다.
+- egov프로젝트에서의 삭제. => 진짜로 삭제할 예정 입니다.
+- -------------------------------------------------------------
+- 사용자단 메인페이지 UI 변경예정(타일즈템플릿-벨로서티템플릿 jsp UI템플릿을 사용) tiles템플릿을 사용예정.
+- 위 JSP UI템플릿은 include기능을 확장한 라이브러리.
+- 쉬어가는 시간에 포인터이후 진도확인 및 C언어 은행입출금프로그램 실습예정.
+
+#### 20210219(금) 작업
+- 수업전 2월22일(4교시) 과제물 제출에 대해서 서식 수정본 모두 다시 확인OK.
+- 매퍼쿼리 <-> PageVO변수 <-> 컨트롤러(매개변수) -> 서비스를 호출 -> DAO호출 -> 쿼리실행
+- 수업전 확인OK: JSP뷰단 <- PageVO변수 <- 컨트롤러(매개변수) <- 쿼리실행
+- egov프로젝트 관리자관리 검색 및 페이징 처리 추가 마무리OK.
+- URL쿼리스트링에 & 기호는 최신html5코딩에서는 &amp; 이렇게 특수기호로 변환해서 사용합니다.
+-1 egov게시물관리 CRUD 처리(관리자관리처럼 마이바티스이용 안하고) ibatis(기존클래스이용)적용.
+-2 egov게시물관리는 컨트롤러와 JSP단만 처리합니다.(AdminLTE)
+- 위 1,2을 정리하면, 관리자관리는 컨트롤러+JSP+서비스+MyBatis를 우리가 만든것 사용OK
+- 게시물관리는 컨트롤러+JSP는 우리가 만들고, 서비스+iBatis는 전자정부것을 사용예정.
+- 전자정부표준프레임워크기반 심플홈템플릿스프링웹프로젝트를 커스터마이징.
+- 정부에서 발주해서 삼성SDS + LG CNS + SK C&C 컨소시엄으로 만들었습니다.(2011년 배포 ~ 지금까지)
+- egov 프로젝트에서 세션이 발생하는 하는 부분:아래 컨트롤러
+- egovframework.let.uat.uia.web패키지 안 EgovLoginController.java
+- admin/board/list_board.jsp <-> EgovNoticeList.jsp
+- AdminController.java       <-> EgovBBSManageController.java
+- egov페이징 UI설정: context-common.xml -> ImagePaginationRenderer.java
+
+#### 20210218(목) 작업
+- 참고: egovframework.let.uat.uia.service.impl패키지명내 EgovLoginServiceImpl.java(로그인처리부분)
+- 비교구문: int a = 3, float b = 3.0
+- if(a==b) TRUE, if(a===b) FALSE, 이것처럼 ==값만비교, ===값과 자료형 까지비교
+- 대학전산과: 1(C언어:은행입출금프로그램-기말고사),2(C++언어),3(java),4(jsp)
+- 수업전: C언어 포인터실습결과 확인OK.
+- egov프로젝트 관리자관리 Create,Delete 작업OK.
+
+#### 20210217(수) 작업.
+- egov프로젝트 관리자관리 RU OK.
+- 차투리시간에 C언어 계속진행.
 
 #### 20210216(화) 작업.
 - 이클립스 빌드 속도 때문에 window메뉴->preference->validation검색->build탭의 체크모두해제 시킴->OK.
-- 컨트롤러 + web패키지 작업 + AdminLTE로 뷰jsp단 작업.(마이바티스기반-새로만들기)
+- web패키지(컨트롤러) 작업 + AdminLTE로 뷰jsp단 작업.(마이바티스기반-새로만들기)
+- jsp단의 root(최상위)경로를 html태그의 / 에서 <c:url value='/' /> 로 변경했음.
+- /admin/home.do URL액션을 주는 설정(web.xml) 확인.
+- /admin/**/*.do URL액션에 로그인체크권한설정추가(egov-com-servlet.xml).
+- 결과는 사용자(기존)과 관리자단을 분리했습니다.
+- 관리자단 home.jsp > header, footer 로 분리.
+- 코드 인스펙션(소스 분석): egov프로젝트의 진입점(webapp/index.jsp) 확인.
 - egov프로젝트의 jsp(동적페이지)폴더에 html(정적페이지)를 jsp로 변환해서 배치합니다.
+- 공통코드(기본코드) 테이블 이용에 대한 개념이 있어야 합니다. 오늘은 여기까지
+
+```
+-- Mysql 데이터베이스에서 CODE테이블의 코드명 가져오는 함수 만들기 (아래)
+CREATE FUNCTION FN_CODE_NM (
+P_CODE_ID VARCHAR(255),
+P_CODE VARCHAR(255)
+)
+RETURNS VARCHAR(255)
+BEGIN
+DECLARE RETURN_VAR VARCHAR(255);
+SELECT CODE_NM INTO RETURN_VAR
+FROM lettccmmndetailcode 
+WHERE 
+CODE_ID = P_CODE_ID AND CODE = P_CODE;
+RETURN RETURN_VAR;
+END
+
+CREATE FUNCTION FN_GROUP_NM(P_GROUP_ID VARCHAR(255)
+) RETURNS varchar(255) CHARSET utf8
+BEGIN
+DECLARE RETURN_VAR VARCHAR(255);
+SELECT GROUP_NM INTO RETURN_VAR
+FROM lettnauthorgroupinfo
+WHERE 
+GROUP_ID = P_GROUP_ID;
+RETURN RETURN_VAR;
+END
+```
 - 게시판관리 부분도 작업: 아이바티스기반(기존egov것)으로 작업(컨트롤러+jsp뷰단만 작업).
 - 오후에 키보드로 입력받은 1개문자를  아스키코드로 변환하는 C프로그램을 작성할 예정.
 
