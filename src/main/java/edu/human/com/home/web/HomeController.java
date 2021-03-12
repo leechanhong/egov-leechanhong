@@ -75,9 +75,10 @@ public class HomeController {
 	private MemberService memberService;
 	
 	@RequestMapping("/tiles/member/mypage_form.do")
-	public String mypage_form(Model model) throws Exception {
+	public String mypage_form(HttpServletRequest request, Model model) throws Exception {
 		//회원 보기[수정] 페이지 이동.
-		EmployerInfoVO memberVO = memberService.viewMember("");
+		LoginVO sessionLoginVO = (LoginVO) request.getSession().getAttribute("LoginVO");
+		EmployerInfoVO memberVO = memberService.viewMember(sessionLoginVO.getId());
 		model.addAttribute("memberVO", memberVO);
 		//공통코드 로그인활성/비활성 해시맵 오브젝트 생성(아래)
 		//System.out.println("디버그:" + memberService.selectCodeMap("COM999"));
