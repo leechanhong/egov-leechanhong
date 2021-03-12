@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,6 +32,7 @@ import edu.human.com.board.service.BoardService;
 import edu.human.com.member.service.EmployerInfoVO;
 import edu.human.com.member.service.MemberService;
 import edu.human.com.util.CommonUtil;
+import edu.human.com.util.PageVO;
 import egovframework.com.cmm.EgovMessageSource;
 import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.service.EgovFileMngService;
@@ -72,6 +74,21 @@ public class HomeController {
 	@Inject
 	private MemberService memberService;
 	
+	@RequestMapping("/tiles/member/mypage_form.do")
+	public String mypage_form(Model model) throws Exception {
+		//회원 보기[수정] 페이지 이동.
+		EmployerInfoVO memberVO = memberService.viewMember("");
+		model.addAttribute("memberVO", memberVO);
+		//공통코드 로그인활성/비활성 해시맵 오브젝트 생성(아래)
+		//System.out.println("디버그:" + memberService.selectCodeMap("COM999"));
+		//맵결과: 디버그:{P={CODE=P, CODE_NM=활성}, S={CODE=S, CODE_NM=비활성}}
+		model.addAttribute("codeMap", memberService.selectCodeMap("COM999"));
+		//그룹이름 해시맵 오브젝트 생성(아래)
+		model.addAttribute("codeGroup", memberService.selectGroupMap());
+			
+		return "member/mypage.tiles";
+	}
+	
 	@RequestMapping("/tiles/join.do")
 	public String join(EmployerInfoVO memberVO,RedirectAttributes rdat) throws Exception {
 		//입력DB처리 호출: 1.암호를 egov암호화툴로 암호, 2.ESNTL_ID 고유ID(게시판관리자ID) 생성
@@ -81,10 +98,12 @@ public class HomeController {
 		memberVO.setESNTL_ID("USRCNFRM_" + memberVO.getEMPLYR_ID());//고유ID값 SET
 		memberService.insertMember(memberVO);
 		rdat.addFlashAttribute("msg", "회원가입");
-		return "redirect:/";
+		return "redirect:/tiles/home.do";
 	}
 	@RequestMapping("/tiles/join_form.do")
 	public String join_form() throws Exception {
+		String encPassword = EgovFileScrty.encryptPassword("1234", "user");
+		System.out.println("user/1234 의 암호화: " + encPassword);
 		return "join.tiles";
 	}
 	
