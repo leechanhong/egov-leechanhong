@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="<c:url value='/resources/home/css/join.css' />">
 	<!-- 메인콘텐츠영역 -->
 	<div id="container">
 		<!-- 메인상단위치표시영역 -->
@@ -18,23 +19,37 @@
 		<!-- 메인본문영역 -->
 		<div class="bodytext_area box_inner">
 			<!-- 폼영역 -->
-			<form method="POST" name="join_form" action="join.html" class="appForm">
+			<form method="POST" name="join_form" action="<c:url value='/tiles/join.do' />" class="appForm">
 				<fieldset>
 					<legend>회원가입폼</legend>
 					<p class="info_pilsoo pilsoo_item">필수입력</p>
 					<ul class="app_list">
 						<li class="clear">
-							<label for="email_lbl" class="tit_lbl pilsoo_item">이메일</label>
-							<div class="app_content"><input type="email" name="email"" class="w100p" id="email_lbl" placeholder="이메일을 입력해주세요" required/></div>
-						</li>
-						<li class="clear">
-							<label for="name_lbl" class="tit_lbl pilsoo_item">작성자명</label>
-							<div class="app_content"><input type="text" name="name" class="w100p" id="name_lbl" placeholder="이름을 입력해주세요" required/></div>
+							<label for="emplyr_id_lbl" class="tit_lbl pilsoo_item">아이디</label>
+							<div class="app_content"><input type="text" name="emplyr_id" class="w100p" id="emplyr_id_lbl" placeholder="아이디를 입력해주세요" required/></div>
 						</li>
 						<li class="clear">
 							<label for="password_lbl" class="tit_lbl pilsoo_item">비밀번호</label>
 							<div class="app_content"><input type="password" name="password" class="w100p" id="password_lbl" placeholder="비밀번호를 입력해주세요" required/></div>
 						</li>
+						<li class="clear">
+							<label for="password_hint_lbl" class="tit_lbl pilsoo_item">암호힌트</label>
+							<div class="app_content"><input type="text" name="password_hint" class="w100p" id="password_hint_lbl" placeholder="암호힌트를 입력해주세요" required/></div>
+						</li>
+						<li class="clear">
+							<label for="password_cnsr_lbl" class="tit_lbl pilsoo_item">암호힌트답변</label>
+							<div class="app_content"><input type="text" name="password_cnsr" class="w100p" id="password_cnsr_lbl" placeholder="암호힌트답변을 입력해주세요" required/></div>
+						</li>
+						<li class="clear">
+							<label for="user_nm_lbl" class="tit_lbl pilsoo_item">이름</label>
+							<div class="app_content"><input type="text" name="user_nm" class="w100p" id="user_nm_lbl" placeholder="이름을 입력해주세요" required/></div>
+						</li>
+						<li class="clear">
+							<label for="email_lbl" class="tit_lbl pilsoo_item">이메일</label>
+							<div class="app_content"><input type="email" name="email"" class="w100p" id="email_lbl" placeholder="이메일을 입력해주세요" required/></div>
+						</li>
+						
+						
 						<li class="clear">
 							<label for="password_chk_lbl" class="tit_lbl pilsoo_item">비밀번호확인</label>
 							<div class="app_content"><input type="password" name="password_chk" class="w100p" id="password_chk_lbl" placeholder="비밀번로를 다시 입력해주세요" required/></div>
