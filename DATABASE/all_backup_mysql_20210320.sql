@@ -201,7 +201,7 @@ CREATE TABLE `lettnauthorgroupinfo` (
 
 LOCK TABLES `lettnauthorgroupinfo` WRITE;
 /*!40000 ALTER TABLE `lettnauthorgroupinfo` DISABLE KEYS */;
-INSERT INTO `lettnauthorgroupinfo` VALUES ('GROUP_00000000000000','관리자그룹','2011-08-02 21:01:59','10'),('GROUP_99','사용자그룹','2021-02-02 21:01:59','20');
+INSERT INTO `lettnauthorgroupinfo` VALUES ('GROUP_00000000000000','ROLE_ADMIN','2011-08-02 21:01:59','관리자그룹'),('GROUP_00000000000001','ROLE_USER','2021-02-02 21:01:59','사용자그룹'),('GROUP_00000000000002','ROLE_ANONYMOUS','2021-02-02 21:01:59','비회원 그룹');
 /*!40000 ALTER TABLE `lettnauthorgroupinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -637,6 +637,29 @@ INSERT INTO `lettntmplatinfo` VALUES ('TMPLAT_BOARD_DEFAULT','게시판 기본�
 /*!40000 ALTER TABLE `lettntmplatinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `AUTHORROLE`;
+CREATE TABLE IF NOT EXISTS `AUTHORROLE` (
+  `AUTHORROLE_ID` decimal(20,0) NOT NULL,
+  `ROLE_PTTRN` varchar(255) NOT NULL,
+  `AUTHOR_CODE` varchar(255) NOT NULL,
+  `AUTHORROLE_DC` VARCHAR(255) DEFAULT NULL,
+  `SORT_ORDR` decimal(8,0) DEFAULT NULL,
+  `USE_AT` char(1) NOT NULL,
+  PRIMARY KEY (`AUTHORROLE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO AUTHORROLE VALUES(1,'/.*.*.*','ROLE_ANONYMOUS','전체허용',1,'Y');
+INSERT INTO AUTHORROLE VALUES(2,'/cop/com/.*.do.*','ROLE_ANONYMOUS','전체허용',2,'Y');
+INSERT INTO AUTHORROLE VALUES(3,'/cop/bbs/*Master*.do','ROLE_USER','사용자만허용게시판',3,'Y');
+INSERT INTO AUTHORROLE VALUES(4,'/uat/uia/.*.do.*','ROLE_USER','사용자만허용',4,'Y');
+INSERT INTO AUTHORROLE VALUES(5,'/uss/umt/mber/.*.do.*','ROLE_USER','사용자만허용',5,'Y');
+INSERT INTO AUTHORROLE VALUES(6,'/uat/uia/actionLogin.do','ROLE_ANONYMOUS','전체허용',6,'Y');
+INSERT INTO AUTHORROLE VALUES(7,'/uat/uia/egovLoginUsr.do','ROLE_ANONYMOUS','전체허용',7,'Y');
+INSERT INTO AUTHORROLE VALUES(8,'/tiles/login.do','ROLE_ANONYMOUS','전체허용',8,'Y');
+INSERT INTO AUTHORROLE VALUES(9,'/login_action.do','ROLE_ANONYMOUS','전체허용',9,'Y');
+INSERT INTO AUTHORROLE VALUES(10,'/cop/bbs/*Master*.do','ROLE_USER','사용자만허용',10,'Y');
+INSERT INTO AUTHORROLE VALUES(11,'/admin/.*.*.*','ROLE_ADMIN','관리자만전체허용',11,'Y');
+
 --
 -- Dumping routines for database 'sht'
 --
@@ -720,4 +743,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-17 16:02:23
+-- Dump completed on 2021-03-20 16:02:23
