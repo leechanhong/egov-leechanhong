@@ -16,6 +16,7 @@
     <listener>
         <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
 	</listener>
+	<!-- 한글 인코딩 때문에 추가(아래) -->
 	<filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
