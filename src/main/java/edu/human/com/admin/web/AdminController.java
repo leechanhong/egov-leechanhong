@@ -78,6 +78,14 @@ public class AdminController {
 	@Autowired
 	private EgovFileMngUtil fileUtil;
 	
+	//권한 관리 수정하기 호출POST
+	@RequestMapping(value="/admin/authorrole/update_author.do",method=RequestMethod.POST)
+	public String update_author(RedirectAttributes rdat,AuthorRoleVO authorRoleVO,PageVO pageVO) throws Exception {
+		//업데이트 서비스호출
+		authorRoleService.updateAuthorRole(authorRoleVO);
+		rdat.addFlashAttribute("msg", "수정");
+		return "redirect:/admin/authorrole/view_author.do?page="+pageVO.getPage()+"&authorrole_id="+authorRoleVO.getAUTHORROLE_ID();
+	}
 	//권한 관리 상세보기 호출GET
 	@RequestMapping(value="/admin/authorrole/view_author.do",method=RequestMethod.GET)
 	public String view_author(@RequestParam("authorrole_id") int authorrole_id, Model model,@ModelAttribute("pageVO") PageVO pageVO) throws Exception {
