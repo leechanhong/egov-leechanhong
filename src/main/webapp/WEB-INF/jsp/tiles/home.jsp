@@ -3,18 +3,42 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>	
 <style>
+/* 미디어쿼리 all(print,screen,등등), min-width:가로크기 태블릿 이상일경우만 적용 */
 @media all and (min-width: 801px) {
-	.fix_height { 
-		height: 440px;
-	    overflow: hidden;
-	    line-height: 440px;
-	 }
- }
+	.fix_height {
+		height:440px;
+		overflow:hidden;
+		line-height:440px;
+	}
+}
 .img_topplace { opacity:0.7; }
 .img_topplace:hover {/*가상선택자 :, 가성요소 ::*/
 	opacity:1.0;
 }
 </style>
+<script>
+$(function(){
+	//var w = JQuery(window).width();
+	//페이지 로딩시 1회만 실행
+	var w = $(window).width();
+	if(w>801) {
+		$(".fix_height").css({"height":(w/3)+"px","line-height":(w/3)+"px"});
+	}
+	//창 리사이징 이벤트가 발생시 아래 반응형 코딩 추가(사용자 창크기를 마음대로 조정시 height값을 자동조정되게)
+	$(window).resize(function(){
+		var w = $(window).width();
+		console.log("디버그: "+w);
+		if(w>801) {
+			$(".fix_height").css({"height":(w/3)+"px","line-height":(w/3)+"px"});
+		}else{
+			$(".fix_height").css({"height":"inherit","line-height":"inherit"});
+		}
+	});
+});
+//JQuery(function($){
+//$(function(){});
+//$(document).ready(function(){});
+</script>
 	<!-- 메인콘텐츠영역 -->
 	<div id="container">
 		<!-- 모바일+PC 공통슬라이드영역 -->

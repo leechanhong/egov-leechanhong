@@ -99,7 +99,7 @@
                   	<label for="GROUP_ID">GROUP_ID</label>
                   	<select class="form-control" name="GROUP_ID" id="GROUP_ID">
                   		<c:forEach items="${codeGroup}" var="sub">
-                  			<option value="${sub.value.group_id}" <c:out value="${(memberVO.GROUP_ID==sub.value.group_id)?'selected':''}" /> >${sub.value.group_id}</option>
+                  			<option value="${sub.value.group_id}" <c:out value="${(memberVO.GROUP_ID==sub.value.group_id)?'selected':''}" /> >${sub.value.group_nm}</option>
                   		</c:forEach>
                   	</select>                  		
                   </div>
