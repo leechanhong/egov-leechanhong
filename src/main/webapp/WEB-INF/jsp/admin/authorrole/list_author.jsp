@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ include file="../include/header.jsp" %>
     
   <!-- 대시보드 본문 Content Wrapper. Contains page content -->
@@ -75,6 +76,9 @@
                     </tr>
                   </thead>
                   <tbody>
+                  <c:if test="${fn:length(authorRoleList)<1}">
+                  	<tr><td colspan="5" class="text-center">검색된 값이 없습니다.</td></tr>
+                  </c:if>
                   <c:forEach items="${authorRoleList}" var="vo">
                     <tr>
                       <td>
